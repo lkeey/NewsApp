@@ -35,5 +35,4 @@ abstract class ArticleDatabase : RoomDatabase() {
             "news_db.db"
         ).build()
     }
-
 }
