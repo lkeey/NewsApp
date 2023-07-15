@@ -1,4 +1,4 @@
-package com.androiddevs.newsapp
+package com.androiddevs.newsapp.models
 
 class Source (
     val id: Any,
