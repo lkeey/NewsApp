@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">NewsApp</string>
+    <string name="app_name">Alertsy</string>
+
     <string name="source">SOURCE</string>
     <string name="title">TITLE</string>
     <string name="description">DESCRIPTION</string>
