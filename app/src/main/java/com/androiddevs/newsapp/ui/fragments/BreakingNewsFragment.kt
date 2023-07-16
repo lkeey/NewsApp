@@ -3,6 +3,7 @@ package com.androiddevs.newsapp.ui.fragments
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.AbsListView
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -14,6 +15,8 @@ import com.androiddevs.newsapp.listeners.NewsClickedListener
 import com.androiddevs.newsapp.models.Article
 import com.androiddevs.newsapp.ui.MainActivity
 import com.androiddevs.newsapp.ui.NewsViewModel
+import com.androiddevs.newsapp.util.Constants.Companion.COUNTRY_CODE
+import com.androiddevs.newsapp.util.Constants.Companion.QUERY_PAGE_SIZE
 import com.androiddevs.newsapp.util.Resource
 
 class BreakingNewsFragment : Fragment (R.layout.fragment_breaking_news), NewsClickedListener {
@@ -26,6 +29,9 @@ class BreakingNewsFragment : Fragment (R.layout.fragment_breaking_news), NewsCli
     private lateinit var progressBar: ProgressBar
     private lateinit var viewModel: NewsViewModel
     private lateinit var newsAdapter: NewsAdapter
+    private var isLoading = false
+    private var isLastPage = false
+    private var isScrolling = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,6 +57,40 @@ class BreakingNewsFragment : Fragment (R.layout.fragment_breaking_news), NewsCli
             adapter = newsAdapter
             layoutManager = LinearLayoutManager(activity)
         }
+
+        recyclerNews.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+
+                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+                    isScrolling = true
+                }
+
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val manager = recyclerView.layoutManager as LinearLayoutManager
+                val firstVisibleItemPosition = manager.findFirstVisibleItemPosition()
+                val visibleItemCount = manager.childCount
+                val totalItemCount = manager.itemCount
+
+                val isNotLoadingAndNotLastPage = !isLoading && !isLastPage
+                val isAtLastPosition = firstVisibleItemPosition + visibleItemCount >= totalItemCount
+                val isNotAtBeginning = firstVisibleItemPosition >= 0
+                val isTotalMoreThanVisible = totalItemCount >= QUERY_PAGE_SIZE
+                val shouldPagination = isNotLoadingAndNotLastPage && isAtLastPosition && isNotAtBeginning && isTotalMoreThanVisible && isScrolling
+
+                if (shouldPagination) {
+                    viewModel.getBreakingNews(COUNTRY_CODE)
+                    isScrolling = false
+                } else {
+                    recyclerNews.setPadding(0, 0, 0, 0)
+                }
+            }
+        })
     }
 
     private fun searchNews() {
@@ -58,14 +98,18 @@ class BreakingNewsFragment : Fragment (R.layout.fragment_breaking_news), NewsCli
             when (it) {
                 is Resource.Success -> {
                     progressBar.visibility = View.INVISIBLE
+                    isLoading = false
 
                     it.data?.let { response ->
-                        newsAdapter.differ.submitList(response.articles)
+                        newsAdapter.differ.submitList(response.articles.toList())
+                        val totalPages = response.totalResults / QUERY_PAGE_SIZE + 2
+                        isLastPage= viewModel.breakingNewsPage == totalPages
                     }
                 }
 
                 is Resource.Error -> {
                     progressBar.visibility = View.INVISIBLE
+                    isLoading = false
 
                     it.message?.let { message ->
                         {
@@ -76,6 +120,8 @@ class BreakingNewsFragment : Fragment (R.layout.fragment_breaking_news), NewsCli
 
                 is Resource.Loading -> {
                     progressBar.visibility = View.VISIBLE
+                    isLoading = true
+
                 }
             }
         }

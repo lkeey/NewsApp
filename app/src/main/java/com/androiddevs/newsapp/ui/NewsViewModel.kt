@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.androiddevs.newsapp.models.Article
 import com.androiddevs.newsapp.models.NewsResponse
 import com.androiddevs.newsapp.repository.NewsRepository
+import com.androiddevs.newsapp.util.Constants.Companion.COUNTRY_CODE
 import com.androiddevs.newsapp.util.Resource
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -15,16 +16,18 @@ class NewsViewModel(
 ) : ViewModel() {
 
     val breakingNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
-    private val breakingNewsPage: Int = 1
+    var breakingNewsPage: Int = 1
+    var breakingNewsResponse: NewsResponse? = null
 
     val searchNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
-    private val searchNewsPage: Int = 1
+    private var searchNewsPage: Int = 1
+    var searchingNewsResponse: NewsResponse? = null
 
     init {
-        getBreakingNews("us")
+        getBreakingNews(COUNTRY_CODE)
     }
 
-    private fun getBreakingNews(countryCode: String) = viewModelScope.launch {
+    fun getBreakingNews(countryCode: String) = viewModelScope.launch {
         breakingNews.postValue(Resource.Loading())
 
         val response = repository.getBreakingNews(countryCode, breakingNewsPage)
@@ -41,7 +44,18 @@ class NewsViewModel(
     private fun handleBreakingNewsResponse(response: Response<NewsResponse>) : Resource<NewsResponse> {
         if (response.isSuccessful) {
             response.body()?.let {
-                return Resource.Success(data = it)
+
+                breakingNewsPage++
+
+                if (breakingNewsResponse == null) {
+                    breakingNewsResponse = it
+                } else {
+                    val oldArticles = breakingNewsResponse?.articles
+                    val newArticles = it.articles
+                    oldArticles?.addAll(newArticles)
+                }
+
+                return Resource.Success(breakingNewsResponse ?: it)
             }
         }
 
@@ -51,7 +65,18 @@ class NewsViewModel(
     private fun handleSearchNewsResponse(response: Response<NewsResponse>) : Resource<NewsResponse> {
         if (response.isSuccessful) {
             response.body()?.let {
-                return Resource.Success(data = it)
+
+                searchNewsPage++
+
+                if (searchingNewsResponse == null) {
+                    searchingNewsResponse = it
+                } else {
+                    val oldArticles = searchingNewsResponse?.articles
+                    val newArticles = it.articles
+                    oldArticles?.addAll(newArticles)
+                }
+
+                return Resource.Success(searchingNewsResponse ?: it)
             }
         }
 
