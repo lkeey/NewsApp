@@ -10,10 +10,13 @@ import com.androiddevs.newsapp.R
 import com.androiddevs.newsapp.models.Article
 import com.androiddevs.newsapp.ui.MainActivity
 import com.androiddevs.newsapp.ui.NewsViewModel
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 
 class ArticlesFragment : Fragment (R.layout.fragment_article) {
 
     private lateinit var webView: WebView
+    private lateinit var fab: FloatingActionButton
     private lateinit var viewModel: NewsViewModel
     private val args: ArticlesFragmentArgs by navArgs()
     private lateinit var article: Article
@@ -23,19 +26,32 @@ class ArticlesFragment : Fragment (R.layout.fragment_article) {
 
         viewModel = (activity as MainActivity).viewModel
 
-        init(view)
+        init()
+
+        setListeners()
 
         receiveData()
 
         setWebView()
     }
 
-    private fun init(view: View) {
-        webView = view.findViewById(R.id.webView)
+    private fun init() {
+
+        webView = requireView().findViewById(R.id.webView)
+        fab = requireView().findViewById(R.id.fab)
     }
 
     private fun receiveData() {
         article = args.article
+    }
+
+    private fun setListeners() {
+        fab.setOnClickListener {
+            viewModel.addArticle(article)
+
+            Snackbar.make(requireView(), "Article Saved", Snackbar.LENGTH_SHORT).show()
+        }
+
     }
 
     private fun setWebView() {

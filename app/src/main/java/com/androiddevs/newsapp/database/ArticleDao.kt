@@ -12,7 +12,7 @@ import com.androiddevs.newsapp.models.Article
 interface ArticleDao {
 
     @Insert(onConflict = REPLACE)
-    suspend fun addArticle(article: Article)
+    suspend fun addArticle(article: Article): Long
 
     @Delete()
     suspend fun deleteArticle(article: Article)

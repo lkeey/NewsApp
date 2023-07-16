@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -113,15 +112,21 @@ class SearchNewsFragment : Fragment (R.layout.fragment_search_news), NewsClicked
     }
 
     override fun onNewsClicked(article: Article) {
-        Toast.makeText(context, "Search article ${article.title}", Toast.LENGTH_SHORT).show()
+        // Toast.makeText(context, "Search article ${article.title}", Toast.LENGTH_SHORT).show()
 
-        val bundle: Bundle = Bundle().apply {
-            putSerializable("article", article)
+        try {
+
+            val bundle: Bundle = Bundle().apply {
+                putSerializable("article", article)
+            }
+
+            findNavController().navigate(
+                R.id.action_searchNewsFragment_to_articlesFragment,
+                bundle
+            )
+
+        } catch (ex: Exception) {
+            Log.i(TAG, "error - ${ex.message}")
         }
-
-        findNavController().navigate(
-            R.id.action_searchNewsFragment_to_articlesFragment,
-            bundle
-        )
     }
 }
