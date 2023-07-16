@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.androiddevs.newsapp.R
-import com.androiddevs.newsapp.adapters.listeners.NewsClickedListener
+import com.androiddevs.newsapp.listeners.NewsClickedListener
 import com.androiddevs.newsapp.models.Article
 import com.bumptech.glide.Glide
 
@@ -28,7 +28,7 @@ class NewsAdapter (
 
     }
 
-    private val differ = AsyncListDiffer(this, differCallback)
+    val differ = AsyncListDiffer(this, differCallback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
         return ArticleViewHolder(

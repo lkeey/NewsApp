@@ -1,4 +1,4 @@
-package com.androiddevs.newsapp.adapters.listeners
+package com.androiddevs.newsapp.listeners
 
 import com.androiddevs.newsapp.models.Article
 
