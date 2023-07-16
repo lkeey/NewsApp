@@ -1,4 +1,4 @@
-package com.androiddevs.newsapp.util
+package com.androiddevs.newsapp.domain.util
 
 class Constants {
     companion object {

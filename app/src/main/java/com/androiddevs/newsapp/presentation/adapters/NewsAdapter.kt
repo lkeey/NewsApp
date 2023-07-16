@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.androiddevs.newsapp.R
-import com.androiddevs.newsapp.listeners.NewsClickedListener
-import com.androiddevs.newsapp.models.Article
+import com.androiddevs.newsapp.domain.listeners.NewsClickedListener
+import com.androiddevs.newsapp.data.models.Article
 import com.bumptech.glide.Glide
 
 class NewsAdapter (

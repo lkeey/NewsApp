@@ -3,11 +3,11 @@ package com.androiddevs.newsapp.presentation.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.androiddevs.newsapp.models.Article
-import com.androiddevs.newsapp.models.NewsResponse
-import com.androiddevs.newsapp.repository.NewsRepository
-import com.androiddevs.newsapp.util.Constants.Companion.COUNTRY_CODE
-import com.androiddevs.newsapp.util.Resource
+import com.androiddevs.newsapp.data.models.Article
+import com.androiddevs.newsapp.data.models.NewsResponse
+import com.androiddevs.newsapp.domain.repository.NewsRepository
+import com.androiddevs.newsapp.domain.util.Constants.Companion.COUNTRY_CODE
+import com.androiddevs.newsapp.domain.util.Resource
 import kotlinx.coroutines.launch
 import retrofit2.Response
 

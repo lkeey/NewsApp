@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.androiddevs.newsapp.R
-import com.androiddevs.newsapp.database.ArticleDatabase
-import com.androiddevs.newsapp.repository.NewsRepository
+import com.androiddevs.newsapp.data.database.ArticleDatabase
+import com.androiddevs.newsapp.domain.repository.NewsRepository
 import com.androiddevs.newsapp.presentation.viewModels.NewsViewModel
 import com.androiddevs.newsapp.presentation.viewModels.NewsViewModelProviderFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView

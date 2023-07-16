@@ -11,13 +11,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.androiddevs.newsapp.R
 import com.androiddevs.newsapp.presentation.adapters.NewsAdapter
-import com.androiddevs.newsapp.listeners.NewsClickedListener
-import com.androiddevs.newsapp.models.Article
+import com.androiddevs.newsapp.domain.listeners.NewsClickedListener
+import com.androiddevs.newsapp.data.models.Article
 import com.androiddevs.newsapp.presentation.ui.activitites.MainActivity
 import com.androiddevs.newsapp.presentation.viewModels.NewsViewModel
-import com.androiddevs.newsapp.util.Constants.Companion.COUNTRY_CODE
-import com.androiddevs.newsapp.util.Constants.Companion.QUERY_PAGE_SIZE
-import com.androiddevs.newsapp.util.Resource
+import com.androiddevs.newsapp.domain.util.Constants.Companion.COUNTRY_CODE
+import com.androiddevs.newsapp.domain.util.Constants.Companion.QUERY_PAGE_SIZE
+import com.androiddevs.newsapp.domain.util.Resource
 
 class BreakingNewsFragment : Fragment (R.layout.fragment_breaking_news), NewsClickedListener {
 

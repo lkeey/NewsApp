@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.androiddevs.newsapp.R
 import com.androiddevs.newsapp.presentation.adapters.NewsAdapter
-import com.androiddevs.newsapp.listeners.NewsClickedListener
-import com.androiddevs.newsapp.models.Article
+import com.androiddevs.newsapp.domain.listeners.NewsClickedListener
+import com.androiddevs.newsapp.data.models.Article
 import com.androiddevs.newsapp.presentation.ui.activitites.MainActivity
 import com.androiddevs.newsapp.presentation.viewModels.NewsViewModel
 import com.google.android.material.snackbar.Snackbar

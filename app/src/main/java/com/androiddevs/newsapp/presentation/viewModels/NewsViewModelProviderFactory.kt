@@ -2,7 +2,7 @@ package com.androiddevs.newsapp.presentation.viewModels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.androiddevs.newsapp.repository.NewsRepository
+import com.androiddevs.newsapp.domain.repository.NewsRepository
 
 class NewsViewModelProviderFactory(
     val newsRepository: NewsRepository

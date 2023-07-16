@@ -1,4 +1,4 @@
-package com.androiddevs.newsapp.models
+package com.androiddevs.newsapp.data.models
 
 data class NewsResponse (
     val articles: MutableList<Article>,

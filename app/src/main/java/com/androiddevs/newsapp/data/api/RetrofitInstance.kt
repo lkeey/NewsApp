@@ -1,6 +1,6 @@
-package com.androiddevs.newsapp.api
+package com.androiddevs.newsapp.data.api
 
-import com.androiddevs.newsapp.util.Constants.Companion.BASE_URL
+import com.androiddevs.newsapp.domain.util.Constants.Companion.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

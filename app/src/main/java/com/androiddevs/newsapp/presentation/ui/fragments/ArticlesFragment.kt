@@ -7,7 +7,7 @@ import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.androiddevs.newsapp.R
-import com.androiddevs.newsapp.models.Article
+import com.androiddevs.newsapp.data.models.Article
 import com.androiddevs.newsapp.presentation.ui.activitites.MainActivity
 import com.androiddevs.newsapp.presentation.viewModels.NewsViewModel
 import com.androiddevs.newsapp.ui.fragments.ArticlesFragmentArgs

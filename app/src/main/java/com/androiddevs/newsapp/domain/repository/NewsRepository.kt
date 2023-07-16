@@ -1,9 +1,9 @@
-package com.androiddevs.newsapp.repository
+package com.androiddevs.newsapp.domain.repository
 
-import com.androiddevs.newsapp.api.RetrofitInstance
-import com.androiddevs.newsapp.database.ArticleDatabase
-import com.androiddevs.newsapp.models.Article
-import com.androiddevs.newsapp.util.Constants.Companion.API_KEY
+import com.androiddevs.newsapp.data.api.RetrofitInstance
+import com.androiddevs.newsapp.data.database.ArticleDatabase
+import com.androiddevs.newsapp.data.models.Article
+import com.androiddevs.newsapp.domain.util.Constants.Companion.API_KEY
 
 class NewsRepository(
     private val database: ArticleDatabase
