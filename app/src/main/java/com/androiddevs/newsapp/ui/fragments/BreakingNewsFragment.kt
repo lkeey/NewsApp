@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.androiddevs.newsapp.R
@@ -83,5 +84,14 @@ class BreakingNewsFragment : Fragment (R.layout.fragment_breaking_news), NewsCli
 
     override fun onNewsClicked(article: Article) {
         Toast.makeText(context, "Article ${article.title}", Toast.LENGTH_SHORT).show()
+
+        val bundle: Bundle = Bundle().apply {
+            putSerializable("article", article)
+        }
+
+        findNavController().navigate(
+            R.id.action_breakingNewsFragment_to_articlesFragment,
+            bundle
+        )
     }
 }

@@ -20,7 +20,7 @@ class NewsViewModel(
     private val searchNewsPage: Int = 1
 
     init {
-        getBreakingNews("ru")
+        getBreakingNews("us")
     }
 
     private fun getBreakingNews(countryCode: String) = viewModelScope.launch {

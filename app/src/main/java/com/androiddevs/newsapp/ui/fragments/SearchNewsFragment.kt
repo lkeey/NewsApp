@@ -8,6 +8,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.androiddevs.newsapp.R
@@ -113,5 +114,14 @@ class SearchNewsFragment : Fragment (R.layout.fragment_search_news), NewsClicked
 
     override fun onNewsClicked(article: Article) {
         Toast.makeText(context, "Search article ${article.title}", Toast.LENGTH_SHORT).show()
+
+        val bundle: Bundle = Bundle().apply {
+            putSerializable("article", article)
+        }
+
+        findNavController().navigate(
+            R.id.action_searchNewsFragment_to_articlesFragment,
+            bundle
+        )
     }
 }
