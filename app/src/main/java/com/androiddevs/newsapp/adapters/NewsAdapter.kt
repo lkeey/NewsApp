@@ -1,12 +1,10 @@
 package com.androiddevs.newsapp.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -14,7 +12,6 @@ import com.androiddevs.newsapp.R
 import com.androiddevs.newsapp.adapters.listeners.NewsClickedListener
 import com.androiddevs.newsapp.models.Article
 import com.bumptech.glide.Glide
-import org.jetbrains.annotations.Async
 
 class NewsAdapter (
     val listener: NewsClickedListener
