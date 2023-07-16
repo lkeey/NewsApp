@@ -1,4 +1,4 @@
-package com.androiddevs.newsapp.ui.fragments
+package com.androiddevs.newsapp.presentation.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -10,11 +10,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.androiddevs.newsapp.R
-import com.androiddevs.newsapp.adapters.NewsAdapter
+import com.androiddevs.newsapp.presentation.adapters.NewsAdapter
 import com.androiddevs.newsapp.listeners.NewsClickedListener
 import com.androiddevs.newsapp.models.Article
-import com.androiddevs.newsapp.ui.MainActivity
-import com.androiddevs.newsapp.ui.NewsViewModel
+import com.androiddevs.newsapp.presentation.ui.activitites.MainActivity
+import com.androiddevs.newsapp.presentation.viewModels.NewsViewModel
 import com.androiddevs.newsapp.util.Constants.Companion.COUNTRY_CODE
 import com.androiddevs.newsapp.util.Constants.Companion.QUERY_PAGE_SIZE
 import com.androiddevs.newsapp.util.Resource
@@ -86,8 +86,6 @@ class BreakingNewsFragment : Fragment (R.layout.fragment_breaking_news), NewsCli
                 if (shouldPagination) {
                     viewModel.getBreakingNews(COUNTRY_CODE)
                     isScrolling = false
-                } else {
-                    recyclerNews.setPadding(0, 0, 0, 0)
                 }
             }
         })
@@ -103,7 +101,11 @@ class BreakingNewsFragment : Fragment (R.layout.fragment_breaking_news), NewsCli
                     it.data?.let { response ->
                         newsAdapter.differ.submitList(response.articles.toList())
                         val totalPages = response.totalResults / QUERY_PAGE_SIZE + 2
-                        isLastPage= viewModel.breakingNewsPage == totalPages
+                        isLastPage = viewModel.breakingNewsPage == totalPages
+
+                        if (isLastPage) {
+                            recyclerNews.setPadding(0, 0, 0, 0 )
+                        }
                     }
                 }
 

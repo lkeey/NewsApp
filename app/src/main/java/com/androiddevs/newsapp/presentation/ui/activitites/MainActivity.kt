@@ -1,7 +1,6 @@
-package com.androiddevs.newsapp.ui
+package com.androiddevs.newsapp.presentation.ui.activitites
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
@@ -9,14 +8,11 @@ import androidx.navigation.ui.setupWithNavController
 import com.androiddevs.newsapp.R
 import com.androiddevs.newsapp.database.ArticleDatabase
 import com.androiddevs.newsapp.repository.NewsRepository
+import com.androiddevs.newsapp.presentation.viewModels.NewsViewModel
+import com.androiddevs.newsapp.presentation.viewModels.NewsViewModelProviderFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
-
-    companion object {
-        const val TAG = "ActivityMain"
-    }
 
     lateinit var viewModel: NewsViewModel
 
@@ -45,5 +41,4 @@ class MainActivity : AppCompatActivity() {
 
         nav.setupWithNavController(navController)
     }
-
 }

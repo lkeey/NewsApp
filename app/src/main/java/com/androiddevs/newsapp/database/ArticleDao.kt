@@ -14,7 +14,7 @@ interface ArticleDao {
     @Insert(onConflict = REPLACE)
     suspend fun addArticle(article: Article): Long
 
-    @Delete()
+    @Delete
     suspend fun deleteArticle(article: Article)
 
     // unnecessary to use coroutines because it get live data

@@ -1,4 +1,4 @@
-package com.androiddevs.newsapp.ui.fragments
+package com.androiddevs.newsapp.presentation.ui.fragments
 
 import android.os.Bundle
 import android.view.View
@@ -8,8 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.androiddevs.newsapp.R
 import com.androiddevs.newsapp.models.Article
-import com.androiddevs.newsapp.ui.MainActivity
-import com.androiddevs.newsapp.ui.NewsViewModel
+import com.androiddevs.newsapp.presentation.ui.activitites.MainActivity
+import com.androiddevs.newsapp.presentation.viewModels.NewsViewModel
+import com.androiddevs.newsapp.ui.fragments.ArticlesFragmentArgs
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 
@@ -57,8 +58,7 @@ class ArticlesFragment : Fragment (R.layout.fragment_article) {
     private fun setWebView() {
         webView.apply {
             webViewClient = WebViewClient()
-            loadUrl(article.url)
+            article.url?.let { loadUrl(it) }
         }
     }
-
 }

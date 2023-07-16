@@ -1,4 +1,4 @@
-package com.androiddevs.newsapp.adapters
+package com.androiddevs.newsapp.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -63,14 +63,12 @@ class NewsAdapter (
 
             Glide.with(itemView.context).load(article.urlToImage).into(img)
 
-            source.text = article.source.name
+            source.text = article.source?.name
             title.text = article.title
             description.text = article.description
             published.text = article.publishedAt
 
             itemView.setOnClickListener { listener.onNewsClicked(article) }
         }
-
     }
-
 }

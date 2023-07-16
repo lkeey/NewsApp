@@ -1,22 +1,20 @@
-package com.androiddevs.newsapp.ui.fragments
+package com.androiddevs.newsapp.presentation.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.androiddevs.newsapp.R
-import com.androiddevs.newsapp.adapters.NewsAdapter
+import com.androiddevs.newsapp.presentation.adapters.NewsAdapter
 import com.androiddevs.newsapp.listeners.NewsClickedListener
 import com.androiddevs.newsapp.models.Article
-import com.androiddevs.newsapp.ui.MainActivity
-import com.androiddevs.newsapp.ui.NewsViewModel
+import com.androiddevs.newsapp.presentation.ui.activitites.MainActivity
+import com.androiddevs.newsapp.presentation.viewModels.NewsViewModel
 import com.google.android.material.snackbar.Snackbar
-import java.lang.Exception
 
 class SavedNewsFragment : Fragment (R.layout.fragment_saved_news), NewsClickedListener {
 

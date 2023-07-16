@@ -4,7 +4,6 @@ import com.androiddevs.newsapp.api.RetrofitInstance
 import com.androiddevs.newsapp.database.ArticleDatabase
 import com.androiddevs.newsapp.models.Article
 import com.androiddevs.newsapp.util.Constants.Companion.API_KEY
-import retrofit2.Retrofit
 
 class NewsRepository(
     private val database: ArticleDatabase
