@@ -21,20 +21,20 @@ class MainActivity : AppCompatActivity() {
     lateinit var viewModel: NewsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        try {
         super.onCreate(savedInstanceState)
 
-            val repository = NewsRepository(ArticleDatabase(context = this))
-            val viewModelProviderFactory = NewsViewModelProviderFactory(newsRepository = repository)
-            viewModel = ViewModelProvider(this, viewModelProviderFactory)[NewsViewModel::class.java]
+        getViewModel()
 
-            setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main)
 
-            // set up navigation
-            setUpNavigation()
-        } catch (ex: Exception) {
-            Log.i(TAG, "error ${ex.stackTraceToString()}")
-        }
+        // set up navigation
+        setUpNavigation()
+    }
+
+    private fun getViewModel() {
+        val repository = NewsRepository(ArticleDatabase(context = this))
+        val viewModelProviderFactory = NewsViewModelProviderFactory(newsRepository = repository)
+        viewModel = ViewModelProvider(this, viewModelProviderFactory)[NewsViewModel::class.java]
     }
 
     private fun setUpNavigation() {

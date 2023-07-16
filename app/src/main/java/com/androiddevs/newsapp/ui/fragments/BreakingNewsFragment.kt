@@ -18,7 +18,7 @@ import com.androiddevs.newsapp.util.Resource
 
 class BreakingNewsFragment : Fragment (R.layout.fragment_breaking_news), NewsClickedListener {
 
-    companion object {
+    private companion object {
         const val TAG = "FragmentBreaking"
     }
 
@@ -36,6 +36,24 @@ class BreakingNewsFragment : Fragment (R.layout.fragment_breaking_news), NewsCli
 
         setUpAdapter()
 
+        searchNews()
+    }
+
+    private fun init(view: View) {
+        recyclerNews = view.findViewById(R.id.rvBreakingNews)
+        progressBar = view.findViewById(R.id.paginationProgressBar)
+    }
+
+    private fun setUpAdapter() {
+        newsAdapter = NewsAdapter(this)
+
+        recyclerNews.apply {
+            adapter = newsAdapter
+            layoutManager = LinearLayoutManager(activity)
+        }
+    }
+
+    private fun searchNews() {
         viewModel.breakingNews.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
@@ -60,20 +78,6 @@ class BreakingNewsFragment : Fragment (R.layout.fragment_breaking_news), NewsCli
                     progressBar.visibility = View.VISIBLE
                 }
             }
-        }
-    }
-
-    private fun init(view: View) {
-        recyclerNews = view.findViewById(R.id.rvBreakingNews)
-        progressBar = view.findViewById(R.id.paginationProgressBar)
-    }
-
-    private fun setUpAdapter() {
-        newsAdapter = NewsAdapter(this)
-
-        recyclerNews.apply {
-            adapter = newsAdapter
-            layoutManager = LinearLayoutManager(activity)
         }
     }
 
